@@ -2,11 +2,13 @@ import sys
 import getopt
 
 
+#TODO: Call this function cause it needs to be printed :-)
 def printResults():
     print('-----Results-----')
     print('Cache Hit Rate: ', '***', '%', sep='')
 
-    
+
+#TODO: You know, actually calculate these values
 def printCalculatedValues():
 
     print('-----Calculated Values-----')
