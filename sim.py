@@ -3,6 +3,20 @@ import getopt
 
 
 def printResults():
+    print('-----Results-----')
+    print('Cache Hit Rate: ', '***', '%', sep='')
+
+    
+def printCalculatedValues():
+
+    print('-----Calculated Values-----')
+    print('Total # of Blocks:')
+    print('Tag Size:')
+    print('Index Size:')
+    print('Implementation Memory Size:')
+
+
+def printHeader():
     sizeString = 'KB'
     tmpSize = int(cacheSize)
 
@@ -16,7 +30,7 @@ def printResults():
     print('Cache Size:', tmpSize, sizeString)
     print('Block Size:', blockSize, 'bytes')
     print('Associativity:', associativity)
-    print('Replacement Policy:', replacementPolicy)
+    print('Replacement Policy:', replacementPolicy, '\n')
 
 
 def readArguments():
@@ -54,4 +68,4 @@ replacementPolicy = None
 
 if __name__ == '__main__':
     readArguments()
-    printResults()
+    printHeader()
