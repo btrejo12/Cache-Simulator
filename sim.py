@@ -1,5 +1,6 @@
 import sys
 import getopt
+import math
 
 
 #TODO: Call this function cause it needs to be printed :-)
@@ -10,11 +11,21 @@ def printResults():
 
 #TODO: You know, actually calculate these values
 def printCalculatedValues():
+    offset = int(math.log(blockSize, 2))
+
+    #Total blocks is always cacheSize / blockSize
+    totalBlocks = int(cacheSize/blockSize)
+
+    #Total index will be cacheSize / (associativity * blockSize)
+    totalIndices =  int(cacheSize / (associativity * blockSize))
+    indexSize = int(math.log(totalIndices, 2)) + 10 #10 for the KB (2^10)
+
+    tagSize = 32 - indexSize - offset;
 
     print('-----Calculated Values-----')
-    print('Total # of Blocks:')
-    print('Tag Size:')
-    print('Index Size:')
+    print('Total # of Blocks:', totalBlocks, 'KB')
+    print('Tag Size:', tagSize, 'bits')
+    print('Index Size:', indexSize, 'bits,', 'Total Indices:', totalIndices, 'KB')
     print('Implementation Memory Size:')
 
 
@@ -52,11 +63,11 @@ def readArguments():
         if opt == '-f':
             filename = arg
         elif opt == '-s':
-            cacheSize = arg
+            cacheSize = int(arg)
         elif opt == '-b':
-            blockSize = arg
+            blockSize = int(arg)
         elif opt == '-a':
-            associativity = arg
+            associativity = int(arg)
         elif opt == '-r':
             replacementPolicy = arg
 
@@ -71,3 +82,4 @@ replacementPolicy = None
 if __name__ == '__main__':
     readArguments()
     printHeader()
+    printCalculatedValues()
