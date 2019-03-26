@@ -18,15 +18,18 @@ def printCalculatedValues():
 
     #Total index will be cacheSize / (associativity * blockSize)
     totalIndices =  int(cacheSize / (associativity * blockSize))
-    indexSize = int(math.log(totalIndices, 2)) + 10 #10 for the KB (2^10)
+    indexBits = int(math.log(totalIndices, 2)) + 10 #10 for the KB (2^10)
 
-    tagSize = 32 - indexSize - offset;
+    tagSize = 32 - indexBits - offset
+
+    #implementation bytes = (((tag+valid)associativity)*numOfRows) / 8 bits
+    implementationSize =  int((((tagSize+1) * associativity) * (2**indexBits)) / 8);
 
     print('-----Calculated Values-----')
     print('Total # of Blocks:', totalBlocks, 'KB')
     print('Tag Size:', tagSize, 'bits')
-    print('Index Size:', indexSize, 'bits,', 'Total Indices:', totalIndices, 'KB')
-    print('Implementation Memory Size:')
+    print('Index Size:', indexBits, 'bits,', 'Total Indices:', totalIndices, 'KB')
+    print('Implementation Memory Size: {:,}'.format(implementationSize), 'bytes')
 
 
 def printHeader():
