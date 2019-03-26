@@ -3,27 +3,39 @@ import getopt
 import math
 
 
-#TODO: Call this function cause it needs to be printed :-)
+def readAddresses():
+    print('\nFirst 20 addresses from file:')
+    lineCounter = 0
+    with open(filename) as f:
+        for line in f:
+            tokens = line.split(' ')
+            if tokens[0] == "EIP":
+                print('0x{}: {}'.format(tokens[2], tokens[1][:4]))
+                lineCounter += 1
+            if lineCounter >= 20:
+                break
+    f.close()
+
+
 def printResults():
     print('-----Results-----')
     print('Cache Hit Rate: ', '***', '%', sep='')
 
 
-#TODO: You know, actually calculate these values
 def printCalculatedValues():
     offset = int(math.log(blockSize, 2))
 
-    #Total blocks is always cacheSize / blockSize
+    # Total blocks is always cacheSize / blockSize
     totalBlocks = int(cacheSize/blockSize)
 
-    #Total index will be cacheSize / (associativity * blockSize)
+    # Total index will be cacheSize / (associativity * blockSize)
     totalIndices =  int(cacheSize / (associativity * blockSize))
-    indexBits = int(math.log(totalIndices, 2)) + 10 #10 for the KB (2^10)
+    indexBits = int(math.log(totalIndices, 2)) + 10  # 10 for the KB (2^10)
 
     tagSize = 32 - indexBits - offset
 
-    #implementation bytes = (((tag+valid)associativity)*numOfRows) / 8 bits
-    implementationSize =  int((((tagSize+1) * associativity) * (2**indexBits)) / 8);
+    # implementation bytes = (((tag+valid)associativity)*numOfRows) / 8 bits
+    implementationSize = int((((tagSize+1) * associativity) * (2**indexBits)) / 8)
 
     print('-----Calculated Values-----')
     print('Total # of Blocks:', totalBlocks, 'KB')
@@ -87,3 +99,4 @@ if __name__ == '__main__':
     printHeader()
     printCalculatedValues()
     printResults()
+    readAddresses()
