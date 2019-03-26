@@ -55,8 +55,8 @@ def readArguments():
 
     try:
         options, arguments = getopt.getopt(sys.argv[1:], 'f:s:b:a:r:')
-    except getopt.GetoptError:
-        print('Oops! Something happened...')
+    except getopt.GetoptError as e:
+        print('ERROR:', e)
         sys.exit(2)
 
     for opt, arg in options:
@@ -83,3 +83,4 @@ if __name__ == '__main__':
     readArguments()
     printHeader()
     printCalculatedValues()
+    printResults()
