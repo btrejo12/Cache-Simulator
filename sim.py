@@ -19,7 +19,7 @@ def readAddresses():
 
 def printResults():
     print('-----Results-----')
-    print('Cache Hit Rate: {}%'.format('***'))
+    print('Cache Hit Rate: {} %'.format('***'))
 
 
 def printCalculatedValues():
@@ -42,7 +42,8 @@ def printCalculatedValues():
     print('Total # of Blocks: {} KB'.format(totalBlocks))
     print('Tag Size: {} bits'.format(tagSize))
     print('Index Size: {} bits, Total Indices: {} KB'.format(indexBits, totalIndices))
-    print('Implementation Memory Size: {:,} bytes, Overhead: {:,}'.format(implementation, overhead), 'bytes')
+    print('Overhead Memory Size: {:,} bytes'.format(overhead))
+    print('Implementation Memory Size: {:,} bytes'.format(implementation))
 
 
 def printHeader():
