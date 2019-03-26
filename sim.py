@@ -19,7 +19,7 @@ def readAddresses():
 
 def printResults():
     print('-----Results-----')
-    print('Cache Hit Rate: ', '***', '%', sep='')
+    print('Cache Hit Rate: {}%'.format('***'))
 
 
 def printCalculatedValues():
@@ -35,13 +35,14 @@ def printCalculatedValues():
     tagSize = 32 - indexBits - offset
 
     # implementation bytes = (((tag+valid)associativity)*numOfRows) / 8 bits
-    implementationSize = int((((tagSize+1) * associativity) * (2**indexBits)) / 8)
+    overhead = int((((tagSize+1) * associativity) * (2**indexBits)) / 8)
+    implementation = overhead + cacheSize
 
     print('-----Calculated Values-----')
-    print('Total # of Blocks:', totalBlocks, 'KB')
-    print('Tag Size:', tagSize, 'bits')
-    print('Index Size:', indexBits, 'bits,', 'Total Indices:', totalIndices, 'KB')
-    print('Implementation Memory Size: {:,}'.format(implementationSize), 'bytes')
+    print('Total # of Blocks: {} KB'.format(totalBlocks))
+    print('Tag Size: {} bits'.format(tagSize))
+    print('Index Size: {} bits, Total Indices: {} KB'.format(indexBits, totalIndices))
+    print('Implementation Memory Size: {:,} bytes, Overhead: {:,}'.format(implementation, overhead), 'bytes')
 
 
 def printHeader():
@@ -52,13 +53,13 @@ def printHeader():
         tmpSize = int(tmpSize/1024);
         sizeString = 'MB'
 
-    print('Cache Simulator CS 3853 Spring 2019 - Group #19\n')
-    print('Cmd Line:', ' '.join(sys.argv[1:]))
-    print('Trace File:', filename)
-    print('Cache Size:', tmpSize, sizeString)
-    print('Block Size:', blockSize, 'bytes')
-    print('Associativity:', associativity)
-    print('Replacement Policy:', replacementPolicy, '\n')
+    print('\nCache Simulator CS 3853 Spring 2019 - Group #19\n')
+    print('Cmd Line: {}'.format(' '.join(sys.argv[1:])))
+    print('Trace File: {}'.format(filename))
+    print('Cache Size: {} {}'.format(tmpSize, sizeString))
+    print('Block Size: {} bytes'.format(blockSize))
+    print('Associativity: {}'.format(associativity))
+    print('Replacement Policy: {}\n'.format(replacementPolicy))
 
 
 def readArguments():
