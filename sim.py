@@ -4,7 +4,6 @@ import math
 
 
 def readAddresses():
-    print('\nFirst 20 addresses from file:')
     lineCounter = 0
     with open(filename) as f:
         for line in f:
@@ -18,7 +17,7 @@ def readAddresses():
 
 
 def printResults():
-    print('-----Results-----')
+    print('\n-----Results-----')
     print('Cache Hit Rate: {} %'.format('***'))
 
 
@@ -38,12 +37,12 @@ def printCalculatedValues():
     overhead = int((((tagSize+1) * associativity) * (2**indexBits)) / 8)
     implementation = overhead + cacheSize
 
-    print('-----Calculated Values-----')
+    print('***** Cache Calculated Parameters *****')
     print('Total # of Blocks: {} KB'.format(totalBlocks))
     print('Tag Size: {} bits'.format(tagSize))
     print('Index Size: {} bits, Total Indices: {} KB'.format(indexBits, totalIndices))
     print('Overhead Memory Size: {:,} bytes'.format(overhead))
-    print('Implementation Memory Size: {:,} bytes'.format(implementation))
+    print('Implementation Memory Size: {:,} bytes\n'.format(implementation))
 
 
 def printHeader():
@@ -55,6 +54,7 @@ def printHeader():
         sizeString = 'MB'
 
     print('\nCache Simulator CS 3853 Spring 2019 - Group #19\n')
+    print('***** Cache Input Parameters *****')
     print('Cmd Line: {}'.format(' '.join(sys.argv[1:])))
     print('Trace File: {}'.format(filename))
     print('Cache Size: {} {}'.format(tmpSize, sizeString))
@@ -100,5 +100,5 @@ if __name__ == '__main__':
     readArguments()
     printHeader()
     printCalculatedValues()
-    printResults()
     readAddresses()
+    printResults()
